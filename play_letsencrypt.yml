@@ -12,15 +12,10 @@
 
   roles:
     - role: letsencrypt
-      letsencrypt_email: 'braga@ict-eng.net'
+      letsencrypt_email: 'root@mtulio.eng.br'
       letsencrypt_domain: 'ict-eng.net'
       letsencrypt_domain_flags:
-        - "-d ict-eng.net"
         - "-d www.ict-eng.net"
-        - "-d api.ict-eng.net"
         - "-d app.ict-eng.net"
-        - "-d mtulio.eng.br"
-        - "-d www.mtulio.eng.br"
-        - "-d api.mtulio.eng.br"
       letsencrypt_pause_services:
         - nginx
