@@ -1,3 +1,6 @@
 [submodule "roles/pm2"]
 	path = roles/pm2
 	url = https://github.com/mtulio/ansible-role-pm2.git
+[submodule "roles/letsencrypt"]
+	path = roles/letsencrypt
+	url = https://github.com/jaywink/ansible-letsencrypt.git
