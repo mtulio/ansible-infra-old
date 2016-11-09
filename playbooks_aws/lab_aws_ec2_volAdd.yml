@@ -1,0 +1,28 @@
+--- # PlayLab 
+- name: AWS Playbook Lab
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: yes
+  gather_facts: no
+
+  vars:
+    aws:
+      region: us-west-2
+
+  vars_files:
+    - keys/aws_cred.yml
+
+  tasks:
+  - name: Attach a new volume to a running instance
+    ec2_snapshot:
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}" 
+      region: "{{ aws.region }}"
+      wait: no
+      instance_id: i-xxxxx
+      volume_size: 1
+      device_name: sde
+    register: ret_ec2
+
+  - debug: msg={{ ret_ec2 }}

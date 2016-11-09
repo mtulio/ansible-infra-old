@@ -1,0 +1,15 @@
+--- # LAB: WHEN
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    author: Marco Tulio R Braga <git@mtulio.eng.br>
+  tasks:
+    - name: Install Apache Appropriate to the Distribution Type (Debian family)
+      command: apt-get -y install apache
+      when: ansible_os_family == "Debian"
+    - name: Install Apache Appropriate to the Distribution Type (RedHat Family)
+      command: yum -y install apache
+      when: ansible_os_family == "RedHat"

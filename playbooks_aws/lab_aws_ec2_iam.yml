@@ -1,0 +1,34 @@
+--- # PlayLab 
+- name: AWS Playbook Lab
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: yes
+  gather_facts: no
+
+  vars:
+    aws:
+      region: us-west-2
+
+  vars_files:
+    - keys/aws_cred.yml
+
+  tasks:
+  - name: Create a couple of IAM Users
+    iam:
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}" 
+      region: "{{ aws.region }}"
+      iam_type: user
+      name: "{{ item }}"
+      state: present
+      password: "password"
+      access_key_state: create
+    with_items:
+      - user01
+      - user02
+    register: ret_ec2
+
+
+  - name: Print the resulting JSON output
+    debug: var={{ ret_ec2 }}

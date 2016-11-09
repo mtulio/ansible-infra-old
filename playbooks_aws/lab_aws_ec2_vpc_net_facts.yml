@@ -1,0 +1,28 @@
+--- # PlayLab 
+- name: AWS Playbook Lab
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: yes
+  gather_facts: no
+
+  vars:
+    aws:
+      region: us-west-2
+
+  vars_files:
+    - keys/aws_cred.yml
+
+  tasks:
+  - name: Gather Facts from VPCs
+    ec2_vpc_net_facts:
+      aws_access_key: "{{ aws_id }}"
+      aws_secret_key: "{{ aws_key }}" 
+      region: "{{ aws.region }}"
+      filters:
+        vpc_id: vpc-xxxxxxxx
+    register: ret_ec2
+
+
+  - name: Print the resulting JSON output
+    debug: var={{ ret_ec2.vpcs[0].id }}

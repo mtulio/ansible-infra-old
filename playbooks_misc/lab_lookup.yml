@@ -1,0 +1,10 @@
+--- # LAB: Lookup values on CSV file and Sys ENVs
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  vars:
+    author: Marco Tulio R Braga <git@mtulio.eng.br>
+  tasks:
+    - debug: msg="Lookup value {{ lookup('csvfile','Marco file=playlab_lookup.csv delimiter=, default=NOMATCH') }}"
+    - debug: msg="{{ lookup('env','HOME') }} is your home dir."

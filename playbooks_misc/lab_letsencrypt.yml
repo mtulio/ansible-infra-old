@@ -1,0 +1,25 @@
+--- # Playlab
+- name: Playbook Laboratory
+  hosts: aws
+  connection: ssh
+  remote_user: ansible
+  become: yes
+  gather_facts: no
+
+  vars:
+    author: Marco Tulio R Braga <git@mtulio.eng.br>
+
+  tasks:
+#    - name: LetsEncrypt
+#      letsencrypt:
+#        account_key: /etc/pki/cert/private/account.key
+#        csr: /etc/pki/cert/csr/sample.com.csr
+#        dest: /etc/httpd/ssl/sample.com.crt
+#      register: sample_com_challenge
+
+  - name: xxadsadads
+    letsencrypt:
+      account_key: /etc/pki/cert/private/account.key
+      csr: /etc/pki/cert/csr/sample.com.csr
+      dest: /etc/httpd/ssl/sample.com.crt
+      data: "{{ sample_com_challenge }}"

@@ -1,0 +1,15 @@
+--- # LAB: Looooooops
+- hosts: all
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    author: Marco Tulio R Braga <git@mtulio.eng.br>
+  tasks:
+    - name: Add a lista of users
+      user: name={{ item }} state=present
+      with_items:
+        - user1
+        - user2
+        - user3

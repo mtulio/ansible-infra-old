@@ -1,0 +1,15 @@
+--- # Install Package from prompt
+- hosts: "{{ prompt_group }}"
+  user: ansible
+  sudo: yes
+  connection: ssh
+  vars:
+    author: Marco Tulio R Braga <git@mtulio.eng.br>
+  vars_prompt:
+    - name: prompt_group
+      prompt: Which groups will be used?
+    - name: prompt_pkg
+      prompt: Install wich packages?
+  tasks:
+    - name: Installing package {{ prompt_pkg }}
+      action: apt name={{ prompt_pkg }} state=installed

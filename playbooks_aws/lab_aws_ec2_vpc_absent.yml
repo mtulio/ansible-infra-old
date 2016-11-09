@@ -1,0 +1,26 @@
+--- # PlayLab 
+- name: AWS Playbook Lab
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: no
+  gather_facts: no
+
+  tasks:
+  - name: Gather Facts from VPCs
+    ec2_vpc_net_facts:
+      #filters:
+      #  vpc_id: vpc-xxxxxxxx
+    register: ret_ec2
+
+  - name: Print the resulting JSON output
+    debug: var={{ ret_ec2 }}
+    when: ret_ec2 is defined
+
+  - name: Gather facts
+    action: ec2_facts
+    register: ret_ec2
+  
+  - name: Print the result
+    debug: var={{ ret_ec2 }}
+    when: ret_ec2 is defined
