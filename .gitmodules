@@ -1,9 +1,3 @@
-[submodule "roles/pm2"]
-	path = roles/pm2
-	url = https://github.com/mtulio/ansible-role-pm2.git
-[submodule "roles/letsencrypt"]
-	path = roles/letsencrypt
-	url = https://github.com/jaywink/ansible-letsencrypt.git
 [submodule "roles_global"]
 	path = roles_global
 	url = git@github.com:mtulio/ansible-roles.git
