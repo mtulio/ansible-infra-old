@@ -2,10 +2,6 @@ machine:
   python:
     version: 2.7.10 
 
-  post:
-    - useradd -m ansible 
-    - echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-
 dependencies:
   pre:
     - pip install -r ansible-requirement

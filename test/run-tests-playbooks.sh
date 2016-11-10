@@ -4,6 +4,7 @@
 
 PLAYBOOK_LIST=test/run-tests-playbooks.list
 
+useradd -m ansible >/dev/null 2>&1
 echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 echo "Retriving the list of playbooks to be tested from [$PLAYBOOK_LIST]."
