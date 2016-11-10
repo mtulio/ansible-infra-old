@@ -4,11 +4,10 @@
 
 PLAYBOOK_LIST=test/run-tests-playbooks.list
 
-echo "Retrive lists of playbook to be tested from $PLAYBOOK_LIST"
+echo "Retriving the list of playbooks to be tested from [$PLAYBOOK_LIST]."
 
 for P_PATH in $(cat $PLAYBOOK_LIST)
 do
-  echo -e "\n"
   echo    "##########################################################"
   echo    "##########################################################"
   echo -e "\t###>> Testing playbook = [$P_PATH] <<###"

@@ -2,8 +2,11 @@
 
 # Retrieve roles dir paths from ansible.cfg and test it
 
-ROLES_PATH=$(grep roles_path ansible.cfg |awk -F'=' '{print$2}')
+ANSIBLE_CONF=ansible.cfg
 
+echo "Retriving the list of role paths to be tested from [$ANSIBLE_CONF]."
+
+ROLES_PATH=$(grep roles_path $ANSIBLE_CONF |awk -F'=' '{print$2}')
 for R_PATH in $(echo $ROLES_PATH |tr ':' ' ')
 do
   echo -e "\n"

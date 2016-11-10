@@ -1,0 +1,18 @@
+--- # LAB
+- name: LAB - Create User
+  hosts: all:!127.0.0.1
+  vars:
+    author: Marco Tulio R Braga <git@mtulio.eng.br>
+  tasks:
+    - name: Create USER and its directory
+      user:
+        name: circleci
+        state: present
+        home: /tmp/circleci
+        shell: /bin/nologin
+        createhome: yes
+      register: ret_val
+
+    - name: Debug Create USER
+      debug: msg="{{ ret_val.rc }}"
+      when: ret_val is defined  
