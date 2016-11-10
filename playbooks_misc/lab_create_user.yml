@@ -2,9 +2,11 @@
 - name: LAB - Create User
   hosts: all:!127.0.0.1
   become: True
+  gather_facts: False
 
   vars:
     author: Marco Tulio R Braga <git@mtulio.eng.br>
+
   tasks:
     - name: Create USER and its directory
       user:
@@ -17,4 +19,4 @@
 
     - name: Debug Create USER
       debug: msg="{{ ret_val.rc }}"
-      when: ret_val is defined  
+      when: ret_val is defined
