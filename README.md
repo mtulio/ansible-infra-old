@@ -1,11 +1,24 @@
-# Ansible Infrastructure
+Ansible Infrastructure
+======================
 
-## Overview
-
-## Getting Started
+[![CircleCI](https://circleci.com/gh/mtulio/ansible-infra.svg?style=svg)](https://circleci.com/gh/mtulio/ansible-infra)
 
 
-## ROLES
+Overview
+========
+
+Main repository to keep configuration management using Ansible.
+Ansible version: 
+
+
+Getting Started
+===============
+
+`git clone git@github.com:mtulio/ansible-infra.git --recursive`
+
+
+ROLES
+=====
 
 ### LetsEncrypt
 
