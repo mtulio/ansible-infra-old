@@ -1,6 +1,6 @@
 --- # LAB
 - name: LAB - Create User
-  hosts: all:!127.0.0.1
+  hosts: localhost
   vars:
     author: Marco Tulio R Braga <git@mtulio.eng.br>
   tasks:
