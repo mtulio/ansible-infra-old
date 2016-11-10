@@ -5,6 +5,7 @@ machine:
 dependencies:
   pre:
     - pip install -r ansible-requirement
+    - 
 
   post:
     - git submodule sync

@@ -6,7 +6,10 @@ ROLES_PATH=$(grep roles_path ansible.cfg |awk -F'=' '{print$2}')
 
 for R_PATH in $(echo $ROLES_PATH |tr ':' ' ')
 do
-  echo -e "\t###>> Testing roles [$R_PATH] <<###"
+  echo -e "\n"
+  echo    "##########################################################"
+  echo    "##########################################################"
+  echo -e "\t###>> Testing roles path = [$R_PATH] <<###"
 
   ROLES=$(ls $R_PATH)
   NOT_TESTED_ROLES=()

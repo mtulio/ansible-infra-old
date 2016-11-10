@@ -18,5 +18,5 @@
       register: ret_val
 
     - name: Debug Create USER
-      debug: msg={{ret_val.rc}}
+      debug: msg="{{ ret_val.rc }}"
       when: ret_val is defined  
