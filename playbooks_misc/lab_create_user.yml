@@ -19,4 +19,4 @@
 
     - name: Debug Create USER
       debug: msg="{{ ret_val.rc }}"
-      when: ret_val is defined
+      when: ret_val and ret_val.rc is defined
