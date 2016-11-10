@@ -6,7 +6,7 @@ dependencies:
   pre:
     - pip install -r ansible-requirement
     - sudo useradd -m ansible
-    - sudo cp /etc/sudoers /tmp/sudoers && echo 'ansible ALL=(ALL) NOPASSWD:ALL' >> /tmp/sudoers && cp /tmp/sudoers /etc/sudoers
+    - sudo cp /etc/sudoers /tmp/sudoers && chmod u+w /tmp/sudoers && echo 'ansible ALL=(ALL) NOPASSWD:ALL' >> /tmp/sudoers && chmod u-w /tmp/sudoers && cp /tmp/sudoers /etc/sudoers
 
   post:
     - git submodule sync
