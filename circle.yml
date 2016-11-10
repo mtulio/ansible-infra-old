@@ -10,7 +10,7 @@ dependencies:
     - git submodule sync
     - git submodule update --init
     - useradd -m ansible 
-    - echo "ansible  ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
+    - echo 'ansible ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 test:
   override:
