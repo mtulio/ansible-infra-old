@@ -1,8 +1,8 @@
 --- # LAB
 - name: LAB - Create User
   hosts: all:!127.0.0.1
-  connection: ssh
-  gather_facts: no
+  become: True
+
   vars:
     author: Marco Tulio R Braga <git@mtulio.eng.br>
   tasks:
