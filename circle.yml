@@ -6,15 +6,17 @@ dependencies:
   pre:
     - pip install -r ansible-requirement
     - sudo useradd -m ansible
-    - sudo cp /etc/sudoers /tmp/sudoers && sudo chmod ugo+w /tmp/sudoers && sudo echo 'ansible ALL=(ALL) NOPASSWD:ALL' >> /tmp/sudoers && sudo chmod ugo-w /tmp/sudoers && sudo mv /tmp/sudoers /etc/sudoers
+    - sudo cp /etc/sudoers /tmp/sudoers
+    - sudo chmod ugo+w /tmp/sudoers
+    - sudo echo 'ansible ALL=(ALL) NOPASSWD:ALL' >> /tmp/sudoers
+    - sudo chmod ugo-w /tmp/sudoers
+    - sudo mv /tmp/sudoers /etc/sudoers
 
   post:
     - git submodule sync
     - git submodule update --init
 
 test:
-  pre:
-    - grep ^ansible /etc/sudoers && 
   override:
     - ./test/run-tests-roles.sh
     - ./test/run-tests-playbooks.sh
