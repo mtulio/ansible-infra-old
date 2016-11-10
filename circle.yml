@@ -6,6 +6,10 @@ dependencies:
   pre:
     - pip install -r ansible-requirement
 
+  post:
+    - git submodule sync
+    - git submodule update --init
+
 test:
   override:
     - ./test/run-tests-roles.sh
