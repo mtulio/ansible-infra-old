@@ -5,15 +5,14 @@ machine:
 dependencies:
   pre:
     - pip install -r ansible-requirement
-    - sudo apt-get update; sudo apt-get install openssh-server
-    - sudo useradd -m ansible
-    - sudo cp /etc/sudoers /tmp/sudoers
-    - sudo chmod ugo+w /tmp/sudoers
-    - sudo echo 'ansible ALL=(ALL) NOPASSWD:ALL' >> /tmp/sudoers
-    - sudo chmod ugo-w /tmp/sudoers
-    - sudo mv /tmp/sudoers /etc/sudoers
-    - sudo su - ansible -c 'cat /dev/zero |ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N "" '
-    - sudo su - ansible -c 'ssh-keygen -y -f ~/.ssh/id_rsa >> ~/.ssh/authorized_keys'
+    #- sudo useradd -m ansible
+    #- sudo cp /etc/sudoers /tmp/sudoers
+    #- sudo chmod ugo+w /tmp/sudoers
+    #- sudo echo 'ansible ALL=(ALL) NOPASSWD:ALL' >> /tmp/sudoers
+    #- sudo chmod ugo-w /tmp/sudoers
+    #- sudo mv /tmp/sudoers /etc/sudoers
+    #- sudo su - ansible -c 'cat /dev/zero |ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N "" '
+    #- sudo su - ansible -c 'ssh-keygen -y -f ~/.ssh/id_rsa >> ~/.ssh/authorized_keys'
 
   post:
     - git submodule sync

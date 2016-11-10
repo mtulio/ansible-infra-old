@@ -16,9 +16,9 @@ do
 
   if [ -f $P_PATH ]; then
       echo -e "\n> Testing playbook: $P_PATH"
-      ansible-playbook -i test/inventory $P_PATH -u ansible --syntax-check
+      ansible-playbook -i test/inventory $P_PATH -u ubuntu --syntax-check
       let "exit_code += $?"
-      ansible-playbook -i test/inventory $P_PATH -u ansible --connection=local
+      ansible-playbook -i test/inventory $P_PATH -u ubuntu --connection=local
       let "exit_code += $?"
   else
       echo -e "> No test playbooks: $P_PATH [file not found]\n"

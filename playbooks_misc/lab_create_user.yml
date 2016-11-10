@@ -2,8 +2,6 @@
 - name: LAB - Create User
   hosts: all:!127.0.0.1
   connection: ssh
-  remote_user: ansible
-  become: yes
   gather_facts: no
   vars:
     author: Marco Tulio R Braga <git@mtulio.eng.br>
