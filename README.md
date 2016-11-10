@@ -8,7 +8,7 @@ Overview
 ========
 
 Main repository to keep configuration management using Ansible.
-Ansible version: 
+Ansible version: 2.2
 
 
 Getting Started
