@@ -1,2 +1,2 @@
 - name: Role example from local
-  debug: msg="Local Role - 'example'"
+  debug: msg="Local Role - {{ role_name }} - {{ role_version }}"
