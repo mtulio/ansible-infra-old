@@ -43,5 +43,7 @@ test:
   override:
     #- find . -iname '*.yml' ! -name 'circle.yml' ! -path './roles_global/*'
     #- ./test/run-tests.sh
-    - ./test/run-tests-roles.sh
-    - ./test/run-tests-playbooks.sh
+    #- ./test/run-tests-roles.sh
+    #- ./test/run-tests-playbooks.sh
+    - ./test/run-circleci-parallel.sh:
+        parallel: true

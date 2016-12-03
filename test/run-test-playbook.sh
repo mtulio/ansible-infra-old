@@ -2,7 +2,7 @@
 
 # Retrieve playbooks to be tested, from list test/run-tests-playbooks.list run it
 
-PLAYBOOK_LIST=test/run-tests-playbooks.list
+PLAYBOOK_LIST=test/run-test-playbooks.list
 
 echo "Retriving the list of playbooks to be tested from [$PLAYBOOK_LIST]."
 
