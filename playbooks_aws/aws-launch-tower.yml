@@ -1,0 +1,85 @@
+--- # Launch EC2 Instances
+- name: Launch EC2 Instances
+  hosts: localhost
+  connection: local
+  remote_user: ansible
+  become: no
+  gather_facts: no
+
+  vars:
+    # https://www.ansible.com/tower-trial
+    tower_ami:
+      us_east_1: ami-a86614bf
+      us_west_1: ami-cdd79aad
+      us_west_2: ami-028f5e62
+      sa_east_1: ami-a23dacce
+    aws_ec2_key_name: key-default
+    aws_iam: ansible-tower
+    aws_ec2_type: t2.micro
+    aws_subnet: subnet-159c0e4d       # lab-subnet-pub-2b
+    aws_sgroup: sg-326dd64b           # log-lab-sg
+    aws_ec2_image: "{{ tower_ami.us_west_2 }}"
+    aws_zone: "{{ lookup('env','AWS_REGION') }}c"
+    aws_ec2_tags: 
+      Name: Ansible Tower
+      Env: Laboratory
+
+  tasks:
+  - name: Ensuring IAM role exists
+    iam:
+      iam_type: role
+      name: "{{aws_iam}}"
+      state: present
+
+#  - name: Creating IAM for ES cluster
+#    iam_policy:
+#      iam_type: role
+#      iam_name: "{{aws_iam}}"
+#      policy_name: ec2-DescribeInstances
+#      state: present
+#      policy_document: aws_iam/policy_ec2-describeInstances.json
+
+  - name: Lauching New Instance(s) 
+    ec2:
+      key_name: "{{ aws_ec2_key_name }}"
+      instance_type: "{{ aws_ec2_type }}"
+      zone: "{{ aws_zone }}"
+      image: "{{ aws_ec2_image }}"  # Graylog2 BOX
+      wait: yes
+      count: 1
+      vpc_subnet_id: "{{ aws_subnet }}"    # PROD/PUB-1/GW
+      assign_public_ip: yes
+      group_id: "{{ aws_sgroup }}"      # PROD
+      user_data: "{{ lookup('file', 'init-userdata.sh') }}"
+      volumes:
+        - device_name: /dev/sda1
+          volume_type: standard
+          volume_size: 8
+          delete_on_termination: true
+      instance_tags:  "{{ aws_ec2_tags }}"
+      instance_profile_name: "{{aws_iam}}"
+    register: ret_ec2_launch
+
+  - name: Wait for SSH to come up in instances
+    wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=320 state=started
+    with_items:
+      - "{{ ret_ec2_launch.instances }}"
+
+  # Assign tags to vols
+  - name: Getting new EBS volumes to tag
+    ec2_vol:
+      region: "{{ lookup('env','AWS_REGION') }}"
+      instance: "{{ item.id }}"
+      state: list
+    register: ec2_vol_returned
+    with_items:
+      - "{{ ret_ec2_launch.instances }}"
+
+  - name: Tagging EBS volumes
+    ec2_tag:
+      resource: "{{ item.id }}"
+      region: "{{ lookup('env','AWS_REGION') }}"
+      state: present
+      tags:
+        Name: "{{ item.attachment_set.instance_id }}_vol-{{ item.attachment_set.device.split('/')[2] }}"
+    with_items: "{{ ec2_vol_returned.results[0].volumes }}"
