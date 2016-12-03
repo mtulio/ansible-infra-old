@@ -47,5 +47,5 @@ test:
     #- ./test/run-tests-playbooks.sh
     #- ./test/run-circleci-parallel.sh:
     #    parallel: true
-    - case $CIRCLE_NODE_INDEX in 0) ./test/run-test-roles.sh ;; 1) ./test/run-test-playbook.sh ;; esac:
+    - case $CIRCLE_NODE_INDEX in 0) ./test/run-test-roles.sh ;; 1) ./test/run-test-playbook.sh ;; 2) echo NO_JOB_DOCKER_2 ;;  3) NO_JOB_TO_DOCKER_3 ; esac:
         parallel: true
