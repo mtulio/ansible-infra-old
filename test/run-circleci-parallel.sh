@@ -15,6 +15,6 @@ then
     echo "[$0] More parallelism than tests scripts."
     echo "[$0] The follow script will be ignored [$test_script]";
 else
-    echo "[$0] Balancing parallel scripts: [$test_script]"
-    bash $test_script
+    echo "[$0] Running parallel scripts: [$test_script]"
+    #bash $test_script
 fi
