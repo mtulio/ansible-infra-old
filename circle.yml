@@ -1,16 +1,52 @@
+# CI Tests - https://docs.gitlab.com/ce/ci/docker/using_docker_build.html
+# Configure the test machine
+# Check out your code
+# Set up your test dependencies
+# Set up your test databases
+# Run your tests
+# (Optionally) deploy your code
+
 machine:
+
+  timezone:
+    America/Los_Angeles # Set the timezone
+
+  hosts:
+    circlehost: 127.0.0.1
+    dev.mtulio.eng.br: 127.0.0.1
+
+  environment:
+    CIRCLE_ENV: test
+    #LINT_FIND_IGNORE_COND: "! -name 'circle.yml' ! -path './roles_global/*'"
+
   python:
     version: 2.7.10 
 
-dependencies:
-  pre:
-    - pip install -r ansible-requirement
-
+checkout:
   post:
     - git submodule sync
     - git submodule update --init
 
-test:
+dependencies:
+
+  pre:
+    - pip install -r ansible-requirement
+
+  #override:
+  #   - pip install ansible==2.1.3.0
+  #   - pip install ansible==2.1.3.0
+
+  #post:
+  #  - 
+
+#ansible-lint:
+#  override:
+#    - find . -iname '*.yml' ! -name 'circle.yml' ! -path './roles_global/*'
+
+ansible-roles:
   override:
     - ./test/run-tests-roles.sh
+
+ansible-playbooks:
+  override:
     - ./test/run-tests-playbooks.sh
