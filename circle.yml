@@ -39,14 +39,9 @@ dependencies:
   #post:
   #  - 
 
-#ansible-lint:
-#  override:
-#    - find . -iname '*.yml' ! -name 'circle.yml' ! -path './roles_global/*'
-
-ansible-roles:
+test:
   override:
+    #- find . -iname '*.yml' ! -name 'circle.yml' ! -path './roles_global/*'
+    #- ./test/run-tests.sh
     - ./test/run-tests-roles.sh
-
-ansible-playbooks:
-  override:
     - ./test/run-tests-playbooks.sh
